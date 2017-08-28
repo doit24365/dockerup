@@ -1,0 +1,28 @@
+usage:
+    SYNOPSIS
+           dockerup.sh [<options>] <ticket number> <docker image version> [<run phpstorm>]
+
+    DESCRIPTION
+            Prepare environment for work.
+            Frontend link:   http://127.0.0.1:XXXX0, where XXXX is ticket number
+            Mailer link:     http://127.0.0.1:XXXX1
+
+    OPTIONS
+            -h|--help
+                Show HELP.
+
+            <ticket number>
+                Use only integer value.
+                    Example: 1234 is number of ticket MDVA-1234
+                Will be used for ports naming.
+                    EXAMPLE:    12340
+
+            <docker image version>
+                Docker image version.
+                Different versions see on https://docker.sparta.corp.magento.com:5000/v2/m2/tags/list
+                    EXAMPLE:    2.1.7-git-sd
+
+            <run phpstorm>
+                -o
+                    Run PHPStorm program.
+

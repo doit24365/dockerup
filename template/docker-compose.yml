@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  web:
+    hostname: "MDVA-%id%"
+    image: docker.sparta.corp.magento.com:5000/m2:%img%
+    ports:
+      - "%id%0:80"
+      - "%id%1:81"
+      - "%id%2:3306"
+      - "%id%3:22"
+    volumes:
+      - ~/:/home/apache/
