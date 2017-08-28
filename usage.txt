@@ -1,6 +1,6 @@
 usage:
     SYNOPSIS
-           dockerup.sh [<options>] <ticket number> <docker image version> [<run phpstorm>]
+           dockerup.sh [<options>] -t <ticket number> -i <docker image version> [<run phpstorm>]
 
     DESCRIPTION
             Prepare environment for work.

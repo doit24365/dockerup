@@ -12,7 +12,7 @@ key="$1"
 
 case $key in
     -h|--help)
-        cat usage.txt;
+        cat $BASE_DIR/usage.txt;
         HELP=true;
         exit 0;
     ;;
