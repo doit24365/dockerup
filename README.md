@@ -1,6 +1,6 @@
 # dockerup
 #### The script automates some routine operations with containers:
-1. Create project directory named (such as ticket number or magento version).
+1. Create project directory (named such as ticket number or magento version).
 2. Create docker-compose.yml.
 3. Run container.
 4. Create host config.
