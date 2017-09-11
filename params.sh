@@ -24,6 +24,10 @@ case $key in
         DOCKER_IMAGE_NAME="$2"
         shift
     ;;
+#    -s|--separate)
+#        TICKET_CONTAINER_SEPARATE="$2"
+#        shift
+#    ;;
     -v|--verbose)
         VERBOSE=true
         shift
@@ -38,12 +42,12 @@ done
 if [ -z $TICKET_NUMBER ]; then
    echo "ERROR: Please specify ticket number";
    ERRORS=true
-else
-    re='^[0-9][0-9][0-9][0-9]$'
-    if ! [[ $TICKET_NUMBER =~ $re ]] ; then
-        echo "ERROR: Wrong format for ticket number. Right example: 1234";
-        ERRORS=true
-    fi
+#else
+#    re='^[0-9][0-9][0-9][0-9]$'
+#    if ! [[ $TICKET_NUMBER =~ $re ]] ; then
+#        echo "ERROR: Wrong format for ticket number. Right example: 1234";
+#        ERRORS=true
+#    fi
 fi
 
 if [ -z $DOCKER_IMAGE_NAME ]; then

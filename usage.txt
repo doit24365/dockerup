@@ -1,6 +1,6 @@
 usage:
     SYNOPSIS
-           dockerup.sh [<options>] -t <ticket number> -i <docker image version> [<run phpstorm>]
+           dockerup.sh [<options>] -t <ticket number or version number> -i <docker image version> [<run phpstorm>]
 
     DESCRIPTION
             Prepare environment for work.
@@ -11,18 +11,20 @@ usage:
             -h|--help
                 Show HELP.
 
-            <ticket number>
+            <ticket number or version number>
                 Use only integer value.
-                    Example: 1234 is number of ticket MDVA-1234
+                    Example:
+                        1234 is number of ticket MDVA-1234
+                        213  is version of Magento
                 Will be used for ports naming.
-                    EXAMPLE:    12340
+                    EXAMPLE:    12340, 2130
 
             <docker image version>
                 Docker image version.
-                Different versions see on https://docker.sparta.corp.magento.com:5000/v2/m2/tags/list
+                Available versions see on https://docker.sparta.corp.magento.com:5000/v2/m2/tags/list
                     EXAMPLE:    2.1.7-git-sd
 
             <run phpstorm>
                 -o
-                    Run PHPStorm program.
+                    [!Developing] Run PHPStorm program.
 
