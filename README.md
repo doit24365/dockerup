@@ -14,6 +14,10 @@ You can run several containers simultaneously. Each container will have own port
     cd dockerup
     chmod +x dockerup.sh
 
+### Before usage:
+    Insert to file ~/.ssh/config:
+        Include cnt_cnf/*
+    
 ### Usage:
     Help:           ~/work/scripts/dockerup/dockerup.sh -h
     Run container:  ~/work/scripts/dockerup/dockerup.sh -t 214 -i 2.1.4-git-sd
