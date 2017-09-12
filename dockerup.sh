@@ -30,10 +30,14 @@ log "Run container '$TICKET_NUMBER'";
 docker-compose up -d;
 
 # Create host config
-log "Create host config '~/.ssh/cnt_cnf/$TICKET_NUMBER'";
-cp "$BASE_DIR/template/hostconf" ~/.ssh/cnt_cnf/"$TICKET_NUMBER";
-sed -i '' s/%host%/"$TICKET_NUMBER"/g ~/.ssh/cnt_cnf/"$TICKET_NUMBER";
-sed -i '' s/%ssh_port%/"$TICKET_NUMBER"3/g ~/.ssh/cnt_cnf/"$TICKET_NUMBER";
+log "Create host config $CONTAINERS_HOST_CONFIG_DIR_PATH/$TICKET_NUMBER";
+if [ ! -d $CONTAINERS_HOST_CONFIG_DIR_PATH ]; then
+    log "Create $CONTAINERS_HOST_CONFIG_DIR_PATH";
+    mkdir -p $CONTAINERS_HOST_CONFIG_DIR_PATH
+fi
+cp "$BASE_DIR/template/hostconf" $CONTAINERS_HOST_CONFIG_DIR_PATH/"$TICKET_NUMBER";
+sed -i '' s/%host%/"$TICKET_NUMBER"/g $CONTAINERS_HOST_CONFIG_DIR_PATH/"$TICKET_NUMBER";
+sed -i '' s/%ssh_port%/"$TICKET_NUMBER"3/g $CONTAINERS_HOST_CONFIG_DIR_PATH/"$TICKET_NUMBER";
 
 # Mount container volume to the host
 sleep 3;
