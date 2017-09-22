@@ -20,7 +20,7 @@
     
 ### Usage:
     Help:           ~/work/scripts/dockerup/dockerup.sh -h
-    Run container:  ~/work/scripts/dockerup/dockerup.sh -t 214 -i 2.1.4-git-sd
+    Run container:  ~/work/scripts/dockerup/dockerup.sh -t 214 -i 2.1.4-git-sd -v
     Frontend:       http://127.0.0.1:2140/
     MailCatcher:    http://127.0.0.1:2141/
     ssh:            ssh 214
