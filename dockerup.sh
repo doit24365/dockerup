@@ -37,6 +37,7 @@ docker-compose up -d;
 if [ $? -eq 0 ]; then
     log "Container was created successfully!"
 else
+    docker-compose down
     rm -Rf $CONTAINER_PATH
     log "Error! Temporary folder was removed!"
 fi
