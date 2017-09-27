@@ -1,6 +1,6 @@
 Host                    %host%
-HostName                127.0.0.1
+HostName                %ip_address%
 User                    apache
-Port                    %ssh_port%
+Port                    22
 IdentityFile            ~/.ssh/docker.pem
 StrictHostKeyChecking   No

@@ -5,9 +5,9 @@ services:
     hostname: "MDVA-%id%"
     image: docker.sparta.corp.magento.com:5000/m2:%img%
     ports:
-      - "%id%0:80"
-      - "%id%1:81"
-      - "%id%2:3306"
-      - "%id%3:22"
+      - "%ip_address%:80:80"
+      - "%ip_address%:81:81"
+      - "%ip_address%:3306:3306"
+      - "%ip_address%:22:22"
     volumes:
       - ~/:/home/apache/
