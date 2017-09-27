@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-CONTAINERS_DIR_PATH=~/work/cont;
+CONTAINERS_DIR_PATH=~/magento/docker;
 CONTAINERS_HOST_CONFIG_DIR_PATH=~/.ssh/cnt_cnf;
+CONTAINERS_DOMAIN_SUFFIX=mdva.sitnikov.kiev.ua
+CONTAINERS_IP_TEMPLATE='127.0.NUM1.NUM2'
