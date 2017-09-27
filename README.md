@@ -6,7 +6,7 @@
 4. Create host config.
 5. Mount container volume to your file system.
 
-#### You can run several containers simultaneously. Each container will have own ports.
+#### You can run several containers simultaneously. Each container will have own IP address.
 
 ### Installing: 
     cd ~/scripts
@@ -17,6 +17,7 @@
 ### Before usage:
 #### Insert to file ~/.ssh/config:
         Include cnt_cnf/*
+#### Create file config_custom.sh with custom params for overriding config if need
     
 ### Usage:
     Help:           ~/work/scripts/dockerup/dockerup.sh -h

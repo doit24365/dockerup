@@ -3,7 +3,7 @@ version: "2"
 services:
   web:
     hostname: "MDVA-%id%"
-    image: docker.sparta.corp.magento.com:5000/m2:%img%
+    image: docker.sparta.corp.magento.com:5000/%magento_version%:%img%
     ports:
       - "%ip_address%:80:80"
       - "%ip_address%:81:81"

@@ -3,6 +3,9 @@
 BASE_DIR="$(dirname "$0")";
 
 source "$BASE_DIR/config.sh";
+if [ -f "$BASE_DIR/config_custom.sh" ]; then
+    source "$BASE_DIR/config_custom.sh";
+fi
 source "$BASE_DIR/lib.sh";
 source "$BASE_DIR/params.sh";
 source "$BASE_DIR/init.sh";
@@ -28,6 +31,7 @@ fi
 
 sed -i '' s/%ip_address%/"$IP_ADDRESS"/g "$CONTAINER_PATH"/docker-compose.yml;
 sed -i '' s/%img%/"$DOCKER_IMAGE_NAME"/g "$CONTAINER_PATH"/docker-compose.yml;
+sed -i '' s/%magento_version%/"$MAGENTO_VERSION"/g "$CONTAINER_PATH"/docker-compose.yml;
 
 # Run container
 cd $CONTAINER_PATH
@@ -39,7 +43,7 @@ if [ $? -eq 0 ]; then
 else
     docker-compose down
     rm -Rf $CONTAINER_PATH
-    log "Error! Temporary folder was removed!"
+    echo "Error! Temporary folder was removed!"
 fi
 
 # Create host config
@@ -61,5 +65,17 @@ sshfs "$TICKET_NUMBER":/var/www/html/ "$CONTAINER_PATH/src/" -ocache=no;
 # Set own domain
 DOMAIN="$TICKET_NUMBER.$CONTAINERS_DOMAIN_SUFFIX"
 sudo sh -c "echo '$IP_ADDRESS     $DOMAIN' >> /etc/hosts"
+
+# Set base url
 ssh $TICKET_NUMBER "mysql -umagento -p123123q magento -e \"UPDATE core_config_data SET value=\\\"http://$DOMAIN/\\\" WHERE path=\\\"web%url\\\";\""
-ssh $TICKET_NUMBER "rm -Rf /var/www/html/var/*; rm -Rf /var/www/html/pub/static/frontend; rm -Rf /var/www/html/pub/static/adminhtml; rm -Rf /var/www/html/pub/static/_requirejs; cd /var/www/html/; php bin/magento setup:static-content:deploy"
+
+# Cleaning and static deploy
+if [ "$MAGENTO_VERSION" = "m2" ]; then
+    ssh $TICKET_NUMBER "sudo rm -Rf /var/www/html/var/*; rm -Rf /var/www/html/pub/static/frontend; rm -Rf /var/www/html/pub/static/adminhtml; rm -Rf /var/www/html/pub/static/_requirejs; cd /var/www/html/; php bin/magento setup:static-content:deploy"
+fi
+
+# Enable xdebug for the container
+if [ "$XDEBUG" ]; then
+    log "Enable xdebug"
+    ssh $TICKET_NUMBER "sudo /usr/local/bin/xdebug-sw.sh 1"
+fi

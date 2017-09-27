@@ -4,8 +4,8 @@ usage:
 
     DESCRIPTION
             Prepare environment for work.
-            Frontend link:   http://127.0.0.1:XXXX0, where XXXX is ticket number
-            Mailer link:     http://127.0.0.1:XXXX1
+            Frontend link:   http://127.0.XX.XX/, where XXXX is ticket number
+            Mailer link:     http://127.0.XX.XX:81/
 
     OPTIONS
             -h|--help
@@ -16,15 +16,17 @@ usage:
                     Example:
                         1234 is number of ticket MDVA-1234
                         213  is version of Magento
-                Will be used for ports naming.
-                    EXAMPLE:    12340, 2130
 
             <docker image version>
                 Docker image version.
-                Available versions see on https://docker.sparta.corp.magento.com:5000/v2/m2/tags/list
-                    EXAMPLE:    2.1.7-git-sd
+                Available versions see on:
+                    https://docker.sparta.corp.magento.com:5000/v2/m1/tags/list
+                    https://docker.sparta.corp.magento.com:5000/v2/m2/tags/list
+
+                    Example:
+                        2.1.7-git-sd
+                        1.14.3.6
 
             <run phpstorm>
                 -o
                     [!Developing] Run PHPStorm program.
-
