@@ -69,7 +69,6 @@ sudo sh -c "echo '$IP_ADDRESS     $DOMAIN' >> /etc/hosts"
 M2_DUMPS_DEPLOYED=0
 if [ "$MAGENTO_VERSION" = "m2" ] && [ "$DOCKER_IMAGE_NAME" = "base" ]
 then
-
     echo "Creating .m2install.conf file..."
     cp "$BASE_DIR/template/.m2install.conf" "$CONTAINER_PATH/.m2install.conf"
     sed -i '' s/%domain%/"$DOMAIN"/g $CONTAINER_PATH/.m2install.conf;
@@ -131,6 +130,12 @@ fi
 if [ "$M2_DUMPS_DEPLOYED" != "1" ]
 then
     ssh $TICKET_NUMBER "mysql -umagento -p123123q magento -e \"UPDATE core_config_data SET value=\\\"http://$DOMAIN/\\\" WHERE path=\\\"web%url\\\";\""
+
+    echo "Creating config.local.php file..."
+    cp "$BASE_DIR/template/config.local.php" "$CONTAINER_PATH/config.local.php"
+    sed -i '' s/%domain%/"$DOMAIN"/g $CONTAINER_PATH/config.local.php;
+    scp $CONTAINER_PATH/config.local.php $TICKET_NUMBER:/var/www/html/app/etc/
+    echo "Created!"
 fi
 
 # Cleaning and static deploy
