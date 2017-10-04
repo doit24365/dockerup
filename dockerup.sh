@@ -30,6 +30,7 @@ if [ ! -f "$CONTAINER_PATH/docker-compose.yml" ]; then
 fi
 
 sed -i '' s/%ip_address%/"$IP_ADDRESS"/g "$CONTAINER_PATH"/docker-compose.yml;
+sed -i '' s/%id%/"$TICKET_NUMBER"/g "$CONTAINER_PATH"/docker-compose.yml;
 sed -i '' s/%img%/"$DOCKER_IMAGE_NAME"/g "$CONTAINER_PATH"/docker-compose.yml;
 sed -i '' s/%magento_version%/"$MAGENTO_VERSION"/g "$CONTAINER_PATH"/docker-compose.yml;
 
@@ -118,29 +119,25 @@ then
     fi
 
     if [ "$codeDumpFilename" != "" ] && [ "$dbdumpFilename" != "" ]
+    then
         echo "Code and database dumps were found. Staring m2install tool..."
         ssh $TICKET_NUMBER "cd /var/www/html; m2install.sh --force"
         M2_DUMPS_DEPLOYED=1
-    then
+    else
         echo "Code and database dumps were not found. m2install will not run automatically!"
     fi
 fi
 
 # Set base url
-if [ "$M2_DUMPS_DEPLOYED" != "1" ]
+if [ "$MAGENTO_VERSION" = "m2" ] && [ "$M2_DUMPS_DEPLOYED" != "1" ]
 then
-    ssh $TICKET_NUMBER "mysql -umagento -p123123q magento -e \"UPDATE core_config_data SET value=\\\"http://$DOMAIN/\\\" WHERE path=\\\"web%url\\\";\""
-
     echo "Creating config.local.php file..."
     cp "$BASE_DIR/template/config.local.php" "$CONTAINER_PATH/config.local.php"
     sed -i '' s/%domain%/"$DOMAIN"/g $CONTAINER_PATH/config.local.php;
     scp $CONTAINER_PATH/config.local.php $TICKET_NUMBER:/var/www/html/app/etc/
     echo "Created!"
-fi
 
-# Cleaning and static deploy
-if [ "$MAGENTO_VERSION" = "m2" ] && [ "$M2_DUMPS_DEPLOYED" != "1" ]
-then
+    # Cleaning and static deploy
     ssh $TICKET_NUMBER "sudo rm -Rf /var/www/html/var/*; rm -Rf /var/www/html/pub/static/frontend; rm -Rf /var/www/html/pub/static/adminhtml; rm -Rf /var/www/html/pub/static/_requirejs; cd /var/www/html/; php bin/magento setup:static-content:deploy"
 fi
 
