@@ -88,7 +88,7 @@ then
     M2_DUMPS_DEPLOYED=1
 fi
 
-if [ "$MAGENTO_VERSION" = "m2" ] && [ "$DOCKER_IMAGE_NAME" = "base" ]
+if [ "$MAGENTO_VERSION" = "m2" ] && [ "$DOCKER_IMAGE_NAME" = "base" ] && [ "$M2_DUMPS_DEPLOYED" != "1" ]
 then
     log "Creating .m2install.conf file..."
     cp "$BASE_DIR/template/.m2install.conf" "$CONTAINER_PATH/.m2install.conf"
