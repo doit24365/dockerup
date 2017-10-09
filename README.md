@@ -13,16 +13,19 @@
     git clone https://github.com/doit24365/dockerup.git
     cd dockerup
     chmod +x dockerup.sh
+    ln -s ./dockerup.sh ~/bin/dockerup.sh
 
 ### Before usage:
 #### Insert to file ~/.ssh/config:
         Include cnt_cnf/*
-#### Create file config_custom.sh with custom params for overriding config if need
+#### Create file config_custom.sh with custom params for overriding config if need. For creating custom config you can use scratch file config_custom.sh.dist with help of command:
+        cp config_custom.sh.dist config_custom.sh
     
 ### Usage:
     Help:           ~/work/scripts/dockerup/dockerup.sh -h
     Run container:  ~/work/scripts/dockerup/dockerup.sh -t 214 -i 2.1.4-git-sd -v
     Frontend:       http://127.0.21.4/
+                    http://214.mdva.dev/
     MailCatcher:    http://127.0.21.4:81/
     ssh:            ssh 214
    
