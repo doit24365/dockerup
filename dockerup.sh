@@ -25,10 +25,8 @@ IP_ADDRESS="${IP_ADDRESS/NUM2/${TICKET_NUMBER:2:2}}"
 sudo ifconfig lo0 alias $IP_ADDRESS up
 
 # Create docker-compose.yml
-if [ ! -f "$CONTAINER_PATH/docker-compose.yml" ]; then
-    log "Create $CONTAINER_PATH/docker-compose.yml";
-    cp "$BASE_DIR/template/docker-compose.yml" "$CONTAINER_PATH/docker-compose.yml"
-fi
+log "Create $CONTAINER_PATH/docker-compose.yml";
+cp "$BASE_DIR/template/docker-compose.yml" "$CONTAINER_PATH/docker-compose.yml"
 
 sed -i '' s/%ip_address%/"$IP_ADDRESS"/g "$CONTAINER_PATH"/docker-compose.yml;
 sed -i '' s/%id%/"$TICKET_NUMBER"/g "$CONTAINER_PATH"/docker-compose.yml;
@@ -165,7 +163,7 @@ then
 fi
 
 # Enable xdebug for the container
-if [ "$XDEBUG" ]; then
+if $XDEBUG; then
     log "Enable xdebug"
     ssh $TICKET_NUMBER "sudo /usr/local/bin/xdebug-sw.sh 1"
 fi

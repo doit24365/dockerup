@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function log {
-    if [ $VERBOSE ]; then
+    if $VERBOSE; then
         echo $1;
     fi;
 }
