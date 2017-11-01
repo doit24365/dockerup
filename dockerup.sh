@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ ! -L "$0" ]]; then
+    echo 'Please create symlink to dockerup.sh before usage!'
+    exit;
+fi
+
 BASE_DIR="$(dirname `readlink "$0"`)";
 CURRENT_PATH=`pwd`
 

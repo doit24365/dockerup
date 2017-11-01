@@ -13,12 +13,13 @@
     git clone https://github.com/doit24365/dockerup.git
     cd dockerup
     chmod +x dockerup.sh
-    ln -s ./dockerup.sh ~/bin/dockerup.sh
+    ln -s $HOME/scripts/dockerup/dockerup.sh /usr/local/bin/dockerup.sh
 
 ### Before usage:
-#### Insert to file ~/.ssh/config:
+#### 1. Check if simlink to dockerup.sh has been created.
+#### 2. Insert to file ~/.ssh/config:
         Include cnt_cnf/*
-#### Create file config_custom.sh with custom params for overriding config if need. For creating custom config you can use scratch file config_custom.sh.dist with help of command:
+#### 3. Create file config_custom.sh with custom params for overriding config if need. For creating custom config you can use scratch file config_custom.sh.dist with help of command:
         cp config_custom.sh.dist config_custom.sh
     
 ### Usage:
