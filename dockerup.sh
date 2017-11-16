@@ -64,7 +64,7 @@ sed -i '' s/%ip_address%/"$IP_ADDRESS"/g $CONTAINERS_HOST_CONFIG_DIR_PATH/"$TICK
 # Mount container volume to the host
 sleep 3;
 
-if [ "$(ls -A $CONTAINER_PATH/src/)" != "" ]
+if [ -d "$CONTAINER_PATH/src/" ] && [ "$(ls -A $CONTAINER_PATH/src/)" != "" ]
 then
     log "Folder $CONTAINER_PATH/src/ is not empty, so folder will no mounted again"
 else
